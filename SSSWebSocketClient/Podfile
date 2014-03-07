@@ -4,6 +4,7 @@
 target "SSSWebSocketClient" do
 
 pod 'AZSocketIO', '~> 0.0.5'
+pod 'dyci', :git => 'https://github.com/DyCI/dyci-main.git'
 
 end
 

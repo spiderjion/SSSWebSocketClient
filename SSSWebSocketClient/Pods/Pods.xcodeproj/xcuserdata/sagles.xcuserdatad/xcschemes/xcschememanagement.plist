@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-SSSWebSocketClient-dyci.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-SSSWebSocketClient.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,22 +32,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1CBFBFD64BC947AF9D66F394</key>
+		<key>24DBEB2AD6E3431F9EC994CB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2C00D2C5886944909C7A1EBC</key>
+		<key>6985CB0A0DA84379808DE30E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>60B016EAE62A4EA4A7A1656C</key>
+		<key>7350463507314944906F9EDF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C4C3EB65882C4CB2A7D37205</key>
+		<key>AC6C5CF453E04827AFA717A4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F9B292F6AB324038B7BBBD3F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

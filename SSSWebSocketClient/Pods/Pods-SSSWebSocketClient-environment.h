@@ -24,3 +24,38 @@
 #define COCOAPODS_VERSION_MINOR_SocketRocket 3
 #define COCOAPODS_VERSION_PATCH_SocketRocket 1
 
+// dyci
+#define COCOAPODS_POD_AVAILABLE_dyci
+// This library does not follow semantic-versioning,
+// so we were not able to define version macros.
+// Please contact the author.
+// Version: 0.1.5.20140124.
+
+// dyci/Core
+#define COCOAPODS_POD_AVAILABLE_dyci_Core
+// This library does not follow semantic-versioning,
+// so we were not able to define version macros.
+// Please contact the author.
+// Version: 0.1.5.20140124.
+
+// dyci/Helpers
+#define COCOAPODS_POD_AVAILABLE_dyci_Helpers
+// This library does not follow semantic-versioning,
+// so we were not able to define version macros.
+// Please contact the author.
+// Version: 0.1.5.20140124.
+
+// dyci/Injections
+#define COCOAPODS_POD_AVAILABLE_dyci_Injections
+// This library does not follow semantic-versioning,
+// so we were not able to define version macros.
+// Please contact the author.
+// Version: 0.1.5.20140124.
+
+// dyci/UIKit Support
+#define COCOAPODS_POD_AVAILABLE_dyci_UIKit_Support
+// This library does not follow semantic-versioning,
+// so we were not able to define version macros.
+// Please contact the author.
+// Version: 0.1.5.20140124.
+

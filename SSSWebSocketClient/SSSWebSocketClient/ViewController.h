@@ -10,4 +10,7 @@
 
 @interface ViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UITableView *chattingTableView;
+@property (weak, nonatomic) IBOutlet UIToolbar *functionToolBar;
+
 @end

@@ -3,14 +3,29 @@ PODS:
   - AZSocketIO (0.0.5):
     - AFNetworking (~> 1.x)
     - SocketRocket (~> 0.x)
+  - dyci (0.1.5.20140124):
+    - dyci/Core
+    - dyci/Helpers
+    - dyci/Injections
+    - dyci/UIKit Support
+  - dyci/Core (0.1.5.20140124)
+  - dyci/Helpers (0.1.5.20140124)
+  - dyci/Injections (0.1.5.20140124)
+  - dyci/UIKit Support (0.1.5.20140124)
   - SocketRocket (0.3.1-beta2)
 
 DEPENDENCIES:
   - AZSocketIO (~> 0.0.5)
+  - dyci (from `https://github.com/DyCI/dyci-main.git`)
+
+EXTERNAL SOURCES:
+  dyci:
+    :git: https://github.com/DyCI/dyci-main.git
 
 SPEC CHECKSUMS:
   AFNetworking: 61fdd49e2ffe6380378df37b3b6e70630bb9dd66
   AZSocketIO: 4b63487082324400f39b1dd47ae79fd155c8304a
+  dyci: a547f35263983aad987afa301ba0a10d2d160c51
   SocketRocket: 7ac946bcce46287a791dfff3c1f8daa692821dae
 
 COCOAPODS: 0.29.0

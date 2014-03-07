@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C4C3EB65882C4CB2A7D37205"
+               BlueprintIdentifier = "6985CB0A0DA84379808DE30E"
                BuildableName = "libPods-SSSWebSocketClient-SocketRocket.a"
                BlueprintName = "Pods-SSSWebSocketClient-SocketRocket"
                ReferencedContainer = "container:Pods.xcodeproj">
