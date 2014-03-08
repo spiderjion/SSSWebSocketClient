@@ -7,16 +7,16 @@
 //
 
 /**
- *  对话类型
+ *  The dialogue type
  */
 typedef NS_ENUM(NSInteger, DialogueType)
 {
     /*!
-     @brief 自己的
+     @brief The dialogue that send by the client and display on the right in the cell.
      */
     DialogueTypeMine,
     /*!
-     @brief 别人的
+     @brief The dialogue that receive from server and display on the left in the cell.
      */
     DialogueTypeOthers
 };
@@ -27,12 +27,12 @@ typedef NS_ENUM(NSInteger, DialogueType)
 @interface Dialogue : BaseModel
 
 /**
- *  对话内容
+ *  The content of dialogue
  */
 @property (nonatomic, copy) NSString *text;
 
 /**
- *  对话类型
+ *  type of DialogueType
  */
 @property (nonatomic, assign) DialogueType type;
 

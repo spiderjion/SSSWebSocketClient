@@ -41,6 +41,7 @@
 /* Begin PBXFileReference section */
 		29E36519495C463E993CD8D1 /* Pods-SSSWebSocketClient.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SSSWebSocketClient.xcconfig"; path = "Pods/Pods-SSSWebSocketClient.xcconfig"; sourceTree = "<group>"; };
 		9C054E9CC5574AE3895D5E0E /* libPods-SSSWebSocketClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SSSWebSocketClient.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB19DA0218C9D8C00035105D /* SocketConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SocketConfig.h; sourceTree = "<group>"; };
 		EB1DA1B918C85C71004737FD /* SSSWebSocketClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SSSWebSocketClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB1DA1BC18C85C71004737FD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EB1DA1BE18C85C71004737FD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -95,6 +96,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EB19DA0118C9D89D0035105D /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				EB19DA0218C9D8C00035105D /* SocketConfig.h */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
 		EB1DA1B018C85C71004737FD = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +139,7 @@
 		EB1DA1C218C85C71004737FD /* SSSWebSocketClient */ = {
 			isa = PBXGroup;
 			children = (
+				EB19DA0118C9D89D0035105D /* Config */,
 				EB961D5F18C9A95000414B47 /* Model */,
 				EB961D5B18C9A3F900414B47 /* BusinessLogic */,
 				EB961D5A18C9A3F200414B47 /* CustomView */,

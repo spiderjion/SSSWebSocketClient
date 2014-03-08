@@ -8,6 +8,7 @@
 
 #import "DialogueCell.h"
 #import "Dialogue.h"
+#import "NSObject+DyCinjection.h"
 
 @implementation DialogueCell
 
@@ -16,9 +17,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        self.textLabel.numberOfLines = 0;
-        self.textLabel.font = [UIFont systemFontOfSize:16.f];
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        [self setCellContents];
     }
     return self;
 }
@@ -33,6 +32,19 @@
 - (void)renderContentsWithData:(Dialogue *)dialogue
 {
     self.textLabel.text = dialogue.text;
+}
+
+- (void)updateOnClassInjection
+{
+    [self setCellContents];
+}
+
+- (void)setCellContents
+{
+    self.textLabel.numberOfLines = 0;
+    self.textLabel.font = [UIFont systemFontOfSize:16.f];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.backgroundColor = [UIColor orangeColor];
 }
 
 @end

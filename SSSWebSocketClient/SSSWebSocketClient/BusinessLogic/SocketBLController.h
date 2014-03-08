@@ -10,4 +10,8 @@
 
 @interface SocketBLController : NSObject
 
+- (void)startConnect;
+
+- (void)endConnect;
+
 @end

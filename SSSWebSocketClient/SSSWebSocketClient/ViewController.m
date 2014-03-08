@@ -9,13 +9,20 @@
 #import "ViewController.h"
 #import "DialogueCell.h"
 #import "Dialogue.h"
+#import "SocketBLController.h"
 
 @interface ViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 /**
- *  对话数组
+ *  The datasource for tableview which contains Dialogue instances.It 
+ *  contains all the dialogues both client's and server's.
  */
 @property (nonatomic, strong) NSMutableArray *dialogueArray;
+
+/**
+ *  The socket client business logic controller
+ */
+@property (nonatomic, strong) SocketBLController *socketController;
 
 @end
 
@@ -58,6 +65,15 @@
     return _dialogueArray;
 }
 
+- (SocketBLController *)socketController
+{
+    if (!_socketController)
+    {
+        _socketController = [[SocketBLController alloc] init];
+    }
+    return _socketController;
+}
+
 #pragma mark - Touch events
 
 - (IBAction)sendButtonPressed:(id)sender
@@ -86,6 +102,10 @@
         textfield.text = nil;
     }
     
+}
+- (IBAction)connectButtonPressed:(id)sender
+{
+    [self.socketController startConnect];
 }
 
 - (IBAction)downSwipe:(UISwipeGestureRecognizer *)sender

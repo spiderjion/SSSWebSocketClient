@@ -55,7 +55,24 @@
                             <outletCollection property="gestureRecognizers" destination="w1v-wa-adm" appends="YES" id="sfF-Lv-pHT"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" title="SocketClient" id="iF4-Gj-gna"/>
+                    <navigationItem key="navigationItem" title="SocketClient" id="iF4-Gj-gna">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="VwI-I2-Srg">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jOL-Bd-8yQ">
+                                <rect key="frame" x="233" y="5" width="71" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="connect">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="connectButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="CTE-L2-bl7"/>
+                                </connections>
+                            </button>
+                            <connections>
+                                <action selector="connectButtonPressed:" destination="vXZ-lx-hvc" id="Q6a-Br-bnb"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="chattingTableView" destination="x93-tV-3jz" id="tN6-e9-RMd"/>
