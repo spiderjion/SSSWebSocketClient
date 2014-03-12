@@ -9,10 +9,10 @@
 #ifndef SSSWebSocketClient_SocketConfig_h
 #define SSSWebSocketClient_SocketConfig_h
 
-#ifdef IsEnableDyci
-#undef IsEnableDyci
-#endif
+#ifndef IsEnableDyci
 #define IsEnableDyci 1
+#endif
+
 
 #define SocketServerHost @"114.246.154.100"
 //#define SocketServerHost @"localhost"
