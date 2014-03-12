@@ -27,20 +27,40 @@
     {
         _socket = [[AZSocketIO alloc] initWithHost:SocketServerHost
                                            andPort:SocketServerPort
-                                            secure:NO
-                                     withNamespace:SOcketEndPoint];
+                                            secure:NO];
+        
+        __block SocketBLController *blcontroller = self;
+        
+        [_socket setMessageReceivedBlock:^(id data) {
+            NSLog(@"%@",data);
+            [blcontroller messageRecieved:data];
+        }];
+        
+        [_socket setEventReceivedBlock:^(NSString *eventName, id data) {
+            NSLog(@"%@ : %@", eventName, data);
+            [blcontroller eventRecieved:eventName data:data];
+        }];
+        
+        [_socket setDisconnectedBlock:^{
+            NSLog(@"disconnect!");
+        }];
+        
+        [_socket setErrorBlock:^(NSError *error) {
+            NSLog(@"error : %@",error);
+        }];
     }
     return _socket;
 }
 
-- (void)startConnect
+#pragma mark - Public methods
+
+- (void)startConnect:(void (^)(void))complete
 {
-    [self.socket setEventRecievedBlock:^(NSString *eventName, id data) {
-        NSLog(@"%@ : %@", eventName, data);
-    }];
-    
     [self.socket connectWithSuccess:^{
-        [self.socket emit:@"I'm ready!" args:@"sagles" error:nil];
+        NSLog(@"Success connect!");
+        dispatch_async(dispatch_get_main_queue(), ^{
+            complete();
+        });
     } andFailure:^(NSError *error) {
         NSLog(@"Fail to connect : %@",error);
     }];
@@ -49,6 +69,23 @@
 - (void)endConnect
 {
     [self.socket disconnect];
+}
+
+- (void)sendMessage:(Dialogue *)message data:(id)data complete:(void (^)())complete failure:(void (^)(NSError *))failure
+{
+    
+}
+
+#pragma mark - Private methods
+
+- (void)eventRecieved:(NSString *)eventName data:(id)data
+{
+    
+}
+
+- (void)messageRecieved:(id)data
+{
+    
 }
 
 @end

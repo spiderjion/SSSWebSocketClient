@@ -8,10 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void(^EventReceiveBlock)(NSString *eventName, id data);
+
+@class Dialogue;
+
 @interface SocketBLController : NSObject
 
-- (void)startConnect;
+/**
+ *  event receive block.It will call when client receive event message from server.
+ */
+@property (nonatomic, copy) EventReceiveBlock eventBlock;
+
+- (void)startConnect:(void(^)(void))complete;
 
 - (void)endConnect;
+
+- (void)sendMessage:(Dialogue *)message
+               data:(id)data complete:(void(^)())complete
+            failure:(void(^)(NSError *error))failure;
 
 @end

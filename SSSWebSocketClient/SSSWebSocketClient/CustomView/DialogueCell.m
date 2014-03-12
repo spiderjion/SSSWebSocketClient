@@ -31,12 +31,15 @@
 
 - (void)renderContentsWithData:(Dialogue *)dialogue
 {
-    self.textLabel.text = dialogue.text;
-}
-
-- (void)updateOnClassInjection
-{
-    [self setCellContents];
+    self.textLabel.text = dialogue.content[SSSDialogueContentKey];
+    if (dialogue.type == DialogueTypeMine)
+    {
+        self.textLabel.textColor = [UIColor orangeColor];
+    }
+    else
+    {
+        self.textLabel.textColor = [UIColor blackColor];
+    }
 }
 
 - (void)setCellContents
@@ -44,7 +47,14 @@
     self.textLabel.numberOfLines = 0;
     self.textLabel.font = [UIFont systemFontOfSize:16.f];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    self.backgroundColor = [UIColor orangeColor];
+    self.backgroundColor = [UIColor clearColor];
 }
+
+#if IsEnableDyci
+- (void)updateOnClassInjection
+{
+    [self setCellContents];
+}
+#endif
 
 @end

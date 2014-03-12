@@ -15,10 +15,12 @@ PODS:
   - SocketRocket (0.3.1-beta2)
 
 DEPENDENCIES:
-  - AZSocketIO (~> 0.0.5)
+  - AZSocketIO (from `https://github.com/spiderjion/AZSocketIO.git`)
   - dyci (from `https://github.com/DyCI/dyci-main.git`)
 
 EXTERNAL SOURCES:
+  AZSocketIO:
+    :git: https://github.com/spiderjion/AZSocketIO.git
   dyci:
     :git: https://github.com/DyCI/dyci-main.git
 

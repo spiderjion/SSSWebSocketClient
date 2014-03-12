@@ -11,7 +11,7 @@
 #import "Dialogue.h"
 #import "SocketBLController.h"
 
-@interface ViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface ViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 
 /**
  *  The datasource for tableview which contains Dialogue instances.It 
@@ -39,17 +39,17 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(handleKeyboardWillShowNotitication:)
+                                             selector:@selector(handleKeyboardNotification:)
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(handleKeyboardWillChangeFrameNotification:)
+                                             selector:@selector(handleKeyboardNotification:)
                                                  name:UIKeyboardWillChangeFrameNotification
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(handleKeyboardWillHideNotification:)
+                                             selector:@selector(handleKeyboardNotification:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
 }
@@ -87,8 +87,12 @@
     
     if (textfield.text.length > 0)
     {
+        //send message
+//        [self.socketController sendMessage:textfield.text];
+        
+        //UI
         Dialogue *d = [[Dialogue alloc] init];
-        d.text = textfield.text;
+        d.content[SSSDialogueContentKey] = textfield.text;
         d.type = DialogueTypeMine;
         [self.dialogueArray addObject:d];
         [self.chattingTableView reloadData];
@@ -105,7 +109,23 @@
 }
 - (IBAction)connectButtonPressed:(id)sender
 {
-    [self.socketController startConnect];
+    [self.socketController startConnect:^{
+        @autoreleasepool {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Input your name"
+                                                                message:nil
+                                                               delegate:self
+                                                      cancelButtonTitle:@"cancel"
+                                                      otherButtonTitles:@"ok", nil];
+            alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+            
+            [alertView show];
+        }
+    }];
+}
+
+- (IBAction)disconnectButtonPressed:(id)sender
+{
+    [self.socketController endConnect];
 }
 
 - (IBAction)downSwipe:(UISwipeGestureRecognizer *)sender
@@ -126,13 +146,13 @@
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Dialogue *d = self.dialogueArray[indexPath.row];
-    return [DialogueCell cellHeightWithText:d.text];
+    return [DialogueCell cellHeightWithText:d.content[SSSDialogueContentKey]];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Dialogue *d = self.dialogueArray[indexPath.row];
-    return [DialogueCell cellHeightWithText:d.text];
+    return [DialogueCell cellHeightWithText:d.content[SSSDialogueContentKey]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -150,23 +170,26 @@
     return cell;
 }
 
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == alertView.cancelButtonIndex)
+    {
+        [self.socketController endConnect];
+    }
+    else
+    {
+        //send message to tell what's your name to server.
+        Dialogue *d = [[Dialogue alloc] init];
+        d.event = @"login";
+        d.type = DialogueTypeMine;
+    }
+}
+
 #pragma mark - Keyboard Notification actions
 
-- (void)handleKeyboardWillShowNotitication:(NSNotification *)notify
-{
-    [self changeViewsFrameWithKeyboardFrame:[notify.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue]
-                          animationDuration:[notify.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]
-                                      curve:[notify.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue]];
-}
-
-- (void)handleKeyboardWillChangeFrameNotification:(NSNotification *)notify
-{
-    [self changeViewsFrameWithKeyboardFrame:[notify.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue]
-                          animationDuration:[notify.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]
-                                      curve:[notify.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue]];
-}
-
-- (void)handleKeyboardWillHideNotification:(NSNotification *)notify
+- (void)handleKeyboardNotification:(NSNotification *)notify
 {
     [self changeViewsFrameWithKeyboardFrame:[notify.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue]
                           animationDuration:[notify.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue]

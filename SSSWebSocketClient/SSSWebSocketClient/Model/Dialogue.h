@@ -27,13 +27,18 @@ typedef NS_ENUM(NSInteger, DialogueType)
 @interface Dialogue : BaseModel
 
 /**
- *  The content of dialogue
+ *  The content of dialogue.The keys of dic are in SSSKey.h.
  */
-@property (nonatomic, copy) NSString *text;
+@property (nonatomic, strong) NSMutableDictionary *content;
 
 /**
  *  type of DialogueType
  */
 @property (nonatomic, assign) DialogueType type;
+
+/**
+ *  dialogue event type.A dialogue maybe just for operation like an administrator kick out a man from group.
+ */
+@property (nonatomic, copy) NSString *event;
 
 @end
