@@ -3,7 +3,7 @@
 
 target "SSSWebSocketClient" do
 
-pod 'AZSocketIO', :git => 'https://github.com/spiderjion/AZSocketIO.git'
+pod 'AZSocketIO', :podspec => 'AZSocketIO.podspec'
 pod 'dyci', :git => 'https://github.com/DyCI/dyci-main.git'
 
 end
@@ -11,4 +11,3 @@ end
 target "SSSWebSocketClientTests" do
 
 end
-
