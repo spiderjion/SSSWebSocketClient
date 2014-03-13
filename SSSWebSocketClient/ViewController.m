@@ -181,9 +181,22 @@
     else
     {
         //send message to tell what's your name to server.
-        Dialogue *d = [[Dialogue alloc] init];
-        d.event = @"login";
-        d.type = DialogueTypeMine;
+        NSString *text = [alertView textFieldAtIndex:0].text;
+        if (text.length > 0)
+        {
+            Dialogue *d = [[Dialogue alloc] init];
+            d.event = SSSSocketEventNickName;
+            d.type = DialogueTypeNone;
+            d.content = text;
+            
+            [self.socketController sendMessage:d
+                                      complete:^{
+                                          
+                                      } failure:^(NSError *error) {
+                                          
+                                      }];
+        }
+        
     }
 }
 

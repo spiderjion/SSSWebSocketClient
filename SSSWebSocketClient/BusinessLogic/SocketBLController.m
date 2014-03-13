@@ -71,7 +71,7 @@
     [self.socket disconnect];
 }
 
-- (void)sendMessage:(Dialogue *)message data:(id)data complete:(void (^)())complete failure:(void (^)(NSError *))failure
+- (void)sendMessage:(Dialogue *)message complete:(void (^)())complete failure:(void (^)(NSError *))failure
 {
     
 }

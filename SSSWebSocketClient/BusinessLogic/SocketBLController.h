@@ -24,7 +24,7 @@ typedef void(^EventReceiveBlock)(NSString *eventName, id data);
 - (void)endConnect;
 
 - (void)sendMessage:(Dialogue *)message
-               data:(id)data complete:(void(^)())complete
+           complete:(void(^)())complete
             failure:(void(^)(NSError *error))failure;
 
 @end

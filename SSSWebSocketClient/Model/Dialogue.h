@@ -12,6 +12,10 @@
 typedef NS_ENUM(NSInteger, DialogueType)
 {
     /*!
+     @brief The dialogue that will not show.
+     */
+    DialogueTypeNone,
+    /*!
      @brief The dialogue that send by the client and display on the right in the cell.
      */
     DialogueTypeMine,
@@ -27,9 +31,9 @@ typedef NS_ENUM(NSInteger, DialogueType)
 @interface Dialogue : BaseModel
 
 /**
- *  The content of dialogue.The keys of dic are in SSSKey.h.
+ *  The content of dialogue.It can be string or dictionary. if it's a dic,the keys of dic are in SSSKey.h.
  */
-@property (nonatomic, strong) NSMutableDictionary *content;
+@property (nonatomic, strong) id content;
 
 /**
  *  type of DialogueType
