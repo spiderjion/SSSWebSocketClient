@@ -5,7 +5,7 @@ Pod::Spec.new do |s|
   s.summary  = 'A socket.io client for objective-c. Cocoapods-friendly. Appledocs. Built of AFNetworking and SocketRocket. Websockets + XHR.'
   s.homepage = 'https://github.com/pashields/AZSocketIO'
   s.authors  = {'Patrick Shields' => 'patrick.m.shields@gmail.com'}
-  s.source   = { :git => 'https://github.com/spiderjion/AZSocketIO.git' }
+  s.source   = { :git => 'https://github.com/weekwood/AZSocketIO.git' }
   s.source_files = 'AZSocketIO/*.{h,m}', 'AZSocketIO/Protocols/*.{h,m}', 'AZSocketIO/Transports/*.{h,m}'
   s.dependency 'SocketRocket', '~> 0.x'
   s.dependency 'AFNetworking', '~> 2.2.0'
