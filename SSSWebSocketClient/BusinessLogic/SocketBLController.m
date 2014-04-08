@@ -9,6 +9,7 @@
 #import "SocketBLController.h"
 #import "SocketConfig.h"
 #import "AZSocketIO.h"
+#import "Dialogue.h"
 
 @interface SocketBLController ()
 
@@ -73,19 +74,47 @@
 
 - (void)sendMessage:(Dialogue *)message complete:(void (^)())complete failure:(void (^)(NSError *))failure
 {
-    
+    NSError *error = nil;
+    BOOL isSuccess = [self.socket emit:message.event
+                                  args:message.content
+                                 error:&error];
+    if (isSuccess)
+    {
+        NSLog(@"send message : %@",message.content);
+        if (complete != NULL)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                complete();
+            });
+        }
+    }
+    else
+    {
+        NSLog(@"Fail to send message : %@",error);
+        if (failure != NULL)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                failure(error);
+            });
+        }
+    }
 }
 
 #pragma mark - Private methods
 
 - (void)eventRecieved:(NSString *)eventName data:(id)data
 {
-    
+    if (self.eventBlock != NULL)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.eventBlock(eventName,data);
+        });
+    }
 }
 
 - (void)messageRecieved:(id)data
 {
-    
+    //none
 }
 
 @end

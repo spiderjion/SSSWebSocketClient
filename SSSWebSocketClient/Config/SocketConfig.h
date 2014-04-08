@@ -14,7 +14,7 @@
 #endif
 
 
-#define SocketServerHost @"114.246.154.100"
+#define SocketServerHost @"114.246.160.48"
 //#define SocketServerHost @"localhost"
 #define SocketServerPort @"4000"
 #define SOcketEndPoint   @"chat"

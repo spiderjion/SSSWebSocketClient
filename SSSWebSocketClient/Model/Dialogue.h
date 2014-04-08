@@ -45,4 +45,9 @@ typedef NS_ENUM(NSInteger, DialogueType)
  */
 @property (nonatomic, copy) NSString *event;
 
+/**
+ *  A Boolean value that determines the message send successfully or not.
+ */
+@property (nonatomic, assign) BOOL isSendSuccessfully;
+
 @end

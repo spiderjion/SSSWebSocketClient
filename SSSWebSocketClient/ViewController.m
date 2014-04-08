@@ -10,6 +10,7 @@
 #import "DialogueCell.h"
 #import "Dialogue.h"
 #import "SocketBLController.h"
+#import "MBProgressHUD.h"
 
 @interface ViewController ()<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 
@@ -70,6 +71,11 @@
     if (!_socketController)
     {
         _socketController = [[SocketBLController alloc] init];
+        __block ViewController *controller = self;
+        _socketController.eventBlock = ^void(NSString *eventName,id data)
+        {
+            [controller socketDidReceiveEvent:eventName data:data];
+        };
     }
     return _socketController;
 }
@@ -88,27 +94,35 @@
     if (textfield.text.length > 0)
     {
         //send message
-//        [self.socketController sendMessage:textfield.text];
-        
-        //UI
         Dialogue *d = [[Dialogue alloc] init];
-        d.content[SSSDialogueContentKey] = textfield.text;
+        d.content = @{SSSDialogueContentKey :textfield.text};
         d.type = DialogueTypeMine;
+        d.event = SSSSocketEventMessage;
+        [self.socketController sendMessage:d
+                                  complete:^{
+                                      d.isSendSuccessfully = YES;
+                                  } failure:^(NSError *error) {
+                                      d.isSendSuccessfully = NO;
+                                  }];
+        
         [self.dialogueArray addObject:d];
         [self.chattingTableView reloadData];
         
+        //scroll to bottom
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.dialogueArray.count-1
                                                     inSection:0];
         [self.chattingTableView scrollToRowAtIndexPath:indexPath
                                       atScrollPosition:UITableViewScrollPositionBottom
                                               animated:NO];
         
+        //clear textfield
         textfield.text = nil;
     }
     
 }
 - (IBAction)connectButtonPressed:(id)sender
 {
+    __block ViewController *controller = self;
     [self.socketController startConnect:^{
         @autoreleasepool {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Input your name"
@@ -117,6 +131,7 @@
                                                       cancelButtonTitle:@"cancel"
                                                       otherButtonTitles:@"ok", nil];
             alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+            alertView.delegate = controller;
             
             [alertView show];
         }
@@ -191,9 +206,14 @@
             
             [self.socketController sendMessage:d
                                       complete:^{
-                                          
+                                          //setup member list
                                       } failure:^(NSError *error) {
-                                          
+                                          @autoreleasepool {
+                                              MBProgressHUD *hud =
+                                              [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                                              hud.labelText = error.debugDescription;
+                                              [hud hide:YES afterDelay:2.f];
+                                          }
                                       }];
         }
         
@@ -246,6 +266,20 @@
                                                                    animated:NO];
                          }
                      }];
+}
+
+#pragma mark - Call back
+
+- (void)socketDidReceiveEvent:(NSString *)eventName data:(id)data
+{
+    if ([eventName isEqualToString:SSSSocketEventOnlineList])
+    {
+        //setup member list
+    }
+    else if ([eventName isEqualToString:SSSSocketEventMessage])
+    {
+        //reload dialogue table
+    }
 }
 
 @end

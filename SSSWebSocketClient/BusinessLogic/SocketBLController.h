@@ -19,6 +19,11 @@ typedef void(^EventReceiveBlock)(NSString *eventName, id data);
  */
 @property (nonatomic, copy) EventReceiveBlock eventBlock;
 
+/**
+ *  Start to connect server.It will ask a nickname when connect successfully.
+ *
+ *  @param complete callback
+ */
 - (void)startConnect:(void(^)(void))complete;
 
 - (void)endConnect;
